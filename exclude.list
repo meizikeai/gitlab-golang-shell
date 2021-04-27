@@ -1,0 +1,10 @@
+.git
+.gitignore
+.gitlab-ci.yml
+
+readme.md
+
+gitlab-golang-shell
+logs
+tmp
+version
