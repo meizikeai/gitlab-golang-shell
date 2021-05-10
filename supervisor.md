@@ -50,11 +50,16 @@ Shut this program down first before starting supervisord.
 请查找一下相关进程，并杀掉
 
 ``` sh
-work@10-9-43-141:~$ ps -ef | grep supervisord
-kill -9 116639
+$ ps -ef | grep supervisord
+$ kill -9 116639
+```
 
-# 忘记它做什么用了
-# unlink /var/run/supervisor.sock
+再次启动，如果提示
+Unlinking stale socket /var/run/supervisor.sock
+需要执行以下命令
+
+``` sh
+$ unlink /var/run/supervisor.sock
 ```
 
 ### 帮助
