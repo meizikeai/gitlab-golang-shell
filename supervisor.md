@@ -2,26 +2,26 @@
 
 #### 安装
 
-``` sh
+```sh
 $ apt-get install supervisor
 ```
 
 安装成功后，会在 /etc/supervisor 目录下，生成 supervisord.conf 配置文件。
 
-在 us
+在 /etc/supervisor/supervisord.conf 文件添加下面 第三行 内容。
 
-``` sh
+```sh
 ; supervisor config file
 
 [unix_http_server]
 file=/var/run/supervisor.sock   ; (the path to the socket file)
 chmod=0700                      ; sockef file mode (default 0700)
-chown=work:work                 ; 添加这行，work 为调用 supervisorctl 进行重启等命令的用户
+chown=work:work                 ; socket file uid:gid owner [添加这行，work 为调用 supervisorctl 进行重启等命令的用户]
 ```
 
 进程配置会读取 /etc/supervisor/conf.d 目录下的 *.conf 配置文件，我们在此目录下创建一个 name.conf 进程配置文件
 
-``` sh
+```sh
 [program:go-practice]                                      ; 项目名称
 directory = /home/work/go-practice                         ; 程序所在目录
 command = /home/work/go-practice/go-practice               ; 程序启动命令
@@ -38,7 +38,7 @@ environment=GIN_MODE=test                                  ; 环境变量用逗�
 
 ### 启动
 
-``` sh
+```sh
 $ supervisord -c /etc/supervisor/supervisord.conf
 ```
 
@@ -49,7 +49,7 @@ Shut this program down first before starting supervisord.
 
 请查找一下相关进程，并杀掉
 
-``` sh
+```sh
 $ ps -ef | grep supervisord
 $ kill -9 116639
 ```
@@ -58,13 +58,13 @@ $ kill -9 116639
 Unlinking stale socket /var/run/supervisor.sock
 需要执行以下命令
 
-``` sh
+```sh
 $ unlink /var/run/supervisor.sock
 ```
 
 ### 帮助
 
-``` sh
+```sh
 # program 为 [program:go-practice] 里配置的值
 # start、restart、stop 都不会载入最新的配置文件
 
