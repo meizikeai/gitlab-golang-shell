@@ -42,10 +42,19 @@ environment=GIN_MODE=test                                  ; 环境变量用逗�
 $ supervisord -c /etc/supervisor/supervisord.conf
 ```
 
+启动过程中如提示，请在 root 下执行 `chmod -R 777 /data/logs` 给权限
+
+```sh
+Error: The directory named as part of the path /data/logs/supervisord/go-practice.log does not exist. in section 'program:go-practice' (file: '/etc/supervisor/conf.d/go-practice.conf')
+For help, use /usr/bin/supervisord -h
+```
+
 如出现下面的错误
 
+```sh
 Error: Another program is already listening on a port that one of our HTTP servers is configured to use. 
 Shut this program down first before starting supervisord.
+```
 
 请查找一下相关进程，并杀掉
 
