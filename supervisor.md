@@ -75,7 +75,16 @@ $ unlink /var/run/supervisor.sock
 
 ```sh
 # program 为 [program:go-practice] 里配置的值
-# start、restart、stop 都不会载入最新的配置文件
+# start、restart、stop、remove、add 都不会载入最新的配置文件
+
+# start      启动程序
+# status     查看程序状态
+# stop       关闭程序
+# tail       查看进程日志
+# update     重启配置文件修改过的程序
+# reload     停止程序，重新加载所有程序
+# reread     读取有更新（增加）的配置文件，不会启动新添加的程序
+# restart    重启程序
 
 # 执行某个进程
 $ supervisorctl restart program
@@ -88,4 +97,7 @@ $ supervisorctl reload
 
 # 根据最新的配置文件，启动新配置或有改动的进程，配置没有改动的进程不重启
 $ supervisorctl update
+
+# 查看运行状态
+$ supervisorctl status
 ```
