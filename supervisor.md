@@ -22,16 +22,17 @@ chown=work:work                 ; socket file uid:gid owner [添加这行，work
 进程配置会读取 /etc/supervisor/conf.d 目录下的 *.conf 配置文件，我们在此目录下创建一个 name.conf 进程配置文件
 
 ```sh
-[program:go-practice]                                      ; 项目名称
-directory = /home/work/go-practice                         ; 程序所在目录
-command = /home/work/go-practice/go-practice               ; 程序启动命令
-user = work                                                ; 可使用 supervisorctl 命令的用户
-autostart = true                                           ; 是否跟随supervisord的启动而启动
-autorestart = true                                         ; 程序退出后自动重启, 可选值：[unexpected, true, false]
-stopasgroup = true                                         ; 进程被杀死时，是否向这个进程组发送stop信号，包括子进程
-killasgroup = true                                         ; 向进程组发送kill信号，包括子进程
-stdout_logfile = /data/logs/supervisord/go-practice.log    ; 该程序日志输出文件，目录需要手动创建
-environment=GIN_MODE=test                                  ; 环境变量用逗号隔开
+[program:go-practice]                                                           ; 项目名称
+directory = /home/work/go-practice                                              ; 程序所在目录
+command = /home/work/go-practice/go-practice                                    ; 程序启动命令
+user = work                                                                     ; 可使用 supervisorctl 命令的用户
+autostart = true                                                                ; 是否跟随supervisord的启动而启动
+autorestart = true                                                              ; 程序退出后自动重启, 可选值：[unexpected, true, false]
+stopasgroup = true                                                              ; 进程被杀死时，是否向这个进程组发送stop信号，包括子进程
+killasgroup = true                                                              ; 向进程组发送kill信号，包括子进程
+stdout_logfile = /data/logs/supervisord/go-practice.log                         ; 程序正常日志文件，supervisord 目录需手动创建
+stderr_logfile = /data/logs/supervisord/go-practice.error.log                   ; 程序错误日志文件，supervisord 目录需手动创建
+environment=GIN_MODE=release                                                    ; 环境变量用逗号隔开
 ```
 
 需要注意的是，请在 root 账号下进行配置，并执行以下命令来启动 supervisord 服务。
