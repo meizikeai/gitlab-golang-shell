@@ -26,13 +26,18 @@ chown=work:work                 ; socket file uid:gid owner [添加这行，work
 directory = /home/work/go-practice                                              ; 程序所在目录
 command = /home/work/go-practice/go-practice                                    ; 程序启动命令
 user = work                                                                     ; 可使用 supervisorctl 命令的用户
-autostart = true                                                                ; 是否跟随supervisord的启动而启动
+autostart = true                                                                ; 是否跟随 supervisord 的启动而启动
 autorestart = true                                                              ; 程序退出后自动重启, 可选值：[unexpected, true, false]
+startretries = 10                                                               ; 启动失败自动重试次数
 stopasgroup = true                                                              ; 进程被杀死时，是否向这个进程组发送stop信号，包括子进程
 killasgroup = true                                                              ; 向进程组发送kill信号，包括子进程
 stdout_logfile = /data/logs/supervisord/go-practice.log                         ; 程序正常日志文件，supervisord 目录需手动创建
+stdout_logfile_maxbytes = 100MB                                                 ; 程序日志文件大小
+stdout_logfile_backups = 10                                                     ; 程序日志保留的备份数
 stderr_logfile = /data/logs/supervisord/go-practice.error.log                   ; 程序错误日志文件，supervisord 目录需手动创建
-environment=GIN_MODE=release                                                    ; 环境变量用逗号隔开
+stderr_logfile_maxbytes = 100MB                                                 ; 程序错误日志文件大小
+stderr_logfile_backups = 10                                                     ; 程序错误日志保留的备份数
+environment=GIN_MODE=release                                                    ; 环境变量，用逗号隔开
 ```
 
 需要注意的是，请在 root 账号下进行配置，并执行以下命令来启动 supervisord 服务。
@@ -102,3 +107,7 @@ $ supervisorctl update
 # 查看运行状态
 $ supervisorctl status
 ```
+
+### 参考
+
+http://supervisord.org/
