@@ -57,10 +57,10 @@ function handleGitlabRunnerCache() {
   time=$(date '+%F %T')
   usage=$(df -h | grep $disk | awk -F '[ %]+' '{print $5}')
 
-  echo "执行时间：${time}; 磁盘使用率：${usage}%;"
+  echo "Execution time: ${time}; Disk usage: ${usage}%;"
 
   if [ $usage -ge $ratio ]; then
-    echo "执行时间：${time}; 磁盘使用率：${usage}%; 执行清理 /data 下 gitlab-runner-builds / gitlab-runner-caches / website 目录"
+    echo "Execution time: ${time}; Disk usage: ${usage}%; Clean up the directory: /data/gitlab-runner-builds /data/gitlab-runner-caches /data/website"
 
     # test
     # handleDeleteFiles "/Users/qinxikun/Downloads"
